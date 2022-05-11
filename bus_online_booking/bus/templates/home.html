@@ -1,0 +1,104 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/style.css'%}">
+  <script defer src="{% static 'js/jquery.js'%}"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <title>BusBooking </title>
+</head>
+
+<body>
+  {% csrf_token %}
+  <h1 class="display-4">Hello..{{request.user.username}}</h1>
+  <ul class="nav justify-content-center mt-5">
+    <li class="nav-item">
+      <a class="nav-link active " aria-current="page" href="{% url 'busselect' %}">Book Bus </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'cancleticket' %}" class="busss">Cancle Booking</a>
+    </li>
+    
+    <li class="nav-item lout">
+      <a class="nav-link btn btn-danger" href="{% url 'logout' %}">Logout</a>
+    </li>&nbsp;&nbsp;&nbsp;
+    <li class="nav-item lout">
+      <a class="nav-link btn btn-primary" href="{% url 'userprofile' %}">Back</a>
+    </li>
+    
+  </ul>
+  <h1 class='text-center '> <b>Booking Bus</b></h1><br>
+
+  <div class="container text-center">
+    <form method="POST">
+     
+      <p class="start">Starting Point</p>
+      <p class="start"><input type='text' class='start_txt' ></p>
+      <p class="start">Ending Point</p>
+      <p class="start"><input type='text' class='end_txt' name='endingpoint'></p>
+      <p class="start">Enter Date</p>
+      <p class="start"><input type='date' class='date_txt' name='date'></p>
+
+
+    
+      <p class="start">Filtering</p>
+      <select name="price" id="cars">
+        <option ></option>
+        <option >200-300</option>
+        <option >300-400</option>
+      </select><br>
+      <button type="submit" class="btn btn-primary mt-3">Search</button>
+
+    </form><br><br>
+  </div>
+  
+
+  {% for ts in transport %}
+
+  <div class="bus1">
+    <p class='root1'> {{ts.transport_name}} Travels</p>
+    <p class='time'> <b>Date&time</b> {{ts.date_time_dpt}}
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </p>
+    <p class='dptpoint'> <b>Duretion:</b> 3 hour's
+    </p>
+    
+
+    <P class="seat"><b>Available
+        Seat:</b> {{ts.seats_available}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Price:</b>  {{ts.price_per_person}}
+    </p>
+    <p class='time'> <b>Bus Number:</b> {{ts.number_plate}}</p>
+    <p class="seat"><b>Bus-Category:</b>  {{ts.bus_category}}</p>
+
+    <div class="book"><a href="{% url 'busbook' ts.id %}" style="color: black; text-decoration: none; " >Book</div>
+
+  </div>
+ 
+  {%endfor%}
+  
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
