@@ -15,7 +15,7 @@
     crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
     <script defer src="{% static 'js/jquery.js'%}"></script>
-    <script defer src="{% static 'js/validation.js'%}"></script>
+    <script defer src="{% static 'js/registervalidations.js'%}"></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,34 +37,40 @@
         {%csrf_token%}
         <div class="mb-3  text-center">
           <label for="exampleInputEmail1" class="form-label">Enter the first name</label>
-          <input type="text" class="form-control w-50 m-auto" name="fn">
+          <input type="text" class="form-control w-50 m-auto" name="fn" id='fn'>
+          <span id='first_name'></span> 
 
         </div>
         <div class="mb-3  text-center">
           <label for="exampleInputPassword1" class="form-label">Enter the last name</label>
-          <input type="text" class="form-control w-50 m-auto" name="ln">
+          <input type="text" class="form-control w-50 m-auto" name="ln" id='ln'>
+          <span id='last_name'></span> 
         </div>
         <div class="mb-3  text-center">
-          <label for="exampleInputPassword1" class="form-label">Enter the Email name</label>
-          <input type="email" class="form-control w-50 m-auto" name="email">
+          <label for="exampleInputPassword1" class="form-label">Enter the Email </label>
+          <input type="email" class="form-control w-50 m-auto" name="email" id='em'>
+          <span id='email'></span> 
         </div>
         <div class="mb-3  text-center">
           <label for="exampleInputPassword1" class="form-label">Enter the Username</label>
-          <input type="text" class="form-control w-50 m-auto" name="username">
+          <input type="text" class="form-control w-50 m-auto" name="username" id='un'>
+          <span id='username1'></span> 
         </div>
         <div class="mb-3  text-center">
           <label for="exampleInputPassword1" class="form-label">Enter the password</label>
-          <input type="password" class="form-control w-50 m-auto" name="password">
+          <input type="password" class="form-control w-50 m-auto" name="password" id='pwd'>
+          <span id='password1'></span> 
         </div>
         <div class="mb-3  text-center">
           <label for="exampleInputPassword1" class="form-label">Enter the confirm password</label>
-          <input type="password" class="form-control w-50 m-auto" name="confirmpassword">
+          <input type="password" class="form-control w-50 m-auto" name="confirmpassword" id='conpwd'>
+          <span id='confirmpassword'></span> 
         </div>
-        <button type="submit" class="btn btn-primary">Save</a></button>
+        <button type="submit" class="btn btn-primary" id='save'>Save</a></button>
         
       </form><br>
-       <a href="{% url 'login' %}" class="btn btn-success">Login</a><br> 
-        <p class='success'>SuccessFully Save.....</p>
+       <a href="{% url 'login' %}" class="btn btn-success" >Login</a><br> 
+        <span class='success' id='success1'>SuccessFully Save.....</span>
     </div>
   </form>
   <div class="container">

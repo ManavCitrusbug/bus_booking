@@ -395,8 +395,36 @@ h1{
     font-size: 17px;
 
 }
-.registermsg{
+#registermsg{
+    font-family: 'Roboto', sans-serif;
+    font-size: 28px;
+    color: brown;
+}
+#first_name{
     font-family: 'Roboto', sans-serif;
     font-size: 17px;
-    color: brown;
+
+}
+#last_name{
+    font-family: 'Roboto', sans-serif;
+    font-size: 17px;
+}
+#email{
+    font-family: 'Roboto', sans-serif;
+    font-size: 17px;
+
+}
+#username{
+    font-family: 'Roboto', sans-serif;
+    font-size: 17px;
+
+}
+#password{
+    font-family: 'Roboto', sans-serif;
+    font-size: 17px;
+}
+#confirmpassword{
+    font-family: 'Roboto', sans-serif;
+    font-size: 17px;
+
 }

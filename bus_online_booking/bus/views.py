@@ -27,19 +27,21 @@ class Login(View):
         un=request.POST['username']
         pwd=request.POST['password']
         user=auth.authenticate(username=un,password=pwd)
-        if user is not None:
+        
+        
 
-                if user.is_superuser == True:
+        if user is not None:
+            
+                if user.is_superuser:
                 # Showbus.get(user)
                     auth.login(request,user)
                     return render(request,'admin.html')
-
                 else:
                     auth.login(request,user)
                     return render(request,'userprofile.html')
         else:
-                messages.info(request,'Invalid input')
-                return redirect('login')
+            messages.info(request,'Invalid input')
+            return redirect('login')
 
 class Register(View):
     
@@ -64,7 +66,7 @@ class Register(View):
         else:
                 regi=User.objects.create_user(first_name=firstname,last_name=lastname,email=Email,password=pass1,username=username)
                 regi.save()
-                return redirect('login')
+                return redirect('register')
 
                 
 
@@ -150,15 +152,20 @@ class Addbus(View):
 
             tn=request.POST['transport']
             busnumber=request.POST['busnumber']
+          
             prz=request.POST['price']
             seats=request.POST['seat']
         
             ctgry=request.POST['category']
             category_object = Category.objects.get(category=ctgry)
             date_time=request.POST['date']
-            add=Transport.objects.create(transport_name=tn,number_plate=busnumber,seats_available=seats, price_per_person=prz,bus_category=category_object,date_time_dpt=date_time)
-            add.save()
-            return redirect('addbus')
+            if Transport.objects.filter(number_plate=busnumber).exists():
+                messages.info(request,'Bus number already exists')
+                return redirect('addbus')
+            else:
+                add=Transport.objects.create(transport_name=tn,number_plate=busnumber,seats_available=seats, price_per_person=prz,bus_category=category_object,date_time_dpt=date_time)
+                add.save()
+                return redirect('addbus')
 
 
 
