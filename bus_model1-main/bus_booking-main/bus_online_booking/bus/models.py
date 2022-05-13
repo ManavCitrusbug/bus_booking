@@ -36,9 +36,14 @@ class Booked_bus(models.Model):
 
 
 
-class journey(models.Model):
+class Journey(models.Model):
     start_point=models.CharField(max_length=20)
     end_point=models.CharField(max_length=20)
     transport=models.ManyToManyField(Transport)
+
+
+    def Buses(self):
+        return ".".join([str(b) for b in self.transport.all() ])
+
 
 

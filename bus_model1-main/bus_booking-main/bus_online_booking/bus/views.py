@@ -1,7 +1,9 @@
+from asyncio import transports
 from asyncio.trsock import TransportSocket
 from email import message
 import email
 from multiprocessing import context
+from tracemalloc import start
 # from pyexpat.errors import messages
 from django.contrib import messages
 
@@ -10,6 +12,8 @@ from urllib import request
 from django import views
 
 from django.shortcuts import render,redirect
+
+from django.http import HttpResponse,JsonResponse
 
 from django.views import *
 from datetime import datetime
@@ -214,12 +218,30 @@ class LogoutView(View):
 
 class Userhome(View):
     def get(self,request):
+        
         if Transport.objects.all().exists():
             ts=Transport.objects.all()
             return render(request,'home.html',{'transport':ts})
         else:
             messages.info(request,'- - - - - - - - - - Sorry Bus Are not Available - - - - - - - - - -')
             return render(request,'home.html')
+    def post(self,request):
+        start = request.POST['start1']
+        end = request.POST['end1']
+        # end=request.POST['end_txt']
+        date=request.POST['date1']
+        journey=Journey.objects.filter(start_point=start, end_point=end)
+       
+        for i in journey:
+            for j in i.transport.all():
+                transport=Transport.objects.filter(date_time_dpt=date)
+                print("********",transport)
+                return render(request,'home.html',{'transport':transport})
+                
+        return JsonResponse({"a":'a'})
+
+
+       
 
 class Userprofile(View):
     def get(self,request):
@@ -280,6 +302,8 @@ class Forgottenpassword(View):
                     return redirect('forgottenpassword')
             else:
                 return redirect('forgottenpassword')
+
+
 
                 
                 

@@ -13,3 +13,9 @@ class categorys(admin.ModelAdmin):
 @admin.register(Booked_bus)
 class Busbooking(admin.ModelAdmin):
         list_display=['busname','name','address','phone','age','book_date_time','paid','user']
+
+@admin.register(Journey)
+class Journey(admin.ModelAdmin):
+         list_display=['start_point','end_point','Buses']
+
+        

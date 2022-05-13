@@ -22,19 +22,20 @@ $(document).ready(function () {
             name_err = false;
             return false;
         }
-        else if (name.length < 5 || name.length > 20) {
-            $('.name1').html("<b>Name length must be 5 to 20 chacters</b>");
-            $('.name1').css("color", 'red');
-            name_err = false;
-            return false;
-        }
-        else if (!pattern.test(name)) {
+        else if (!pattern.test(name[0])) {
             $('.name1').html("<b>Name not start with zero and special symbols </b>");
             $('.name1').css("color", 'red');
             name_err = false;
             return false;
 
         }
+        else if (name.length < 5 || name.length > 20) {
+            $('.name1').html("<b>Name length must be 5 to 20 chacters</b>");
+            $('.name1').css("color", 'red');
+            name_err = false;
+            return false;
+        }
+     
         else {
             $('.name1').html("<b>&nbsp;&nbsp;&#10004;</b>");
             $('.name1').css("color", "green");
