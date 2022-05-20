@@ -1,0 +1,89 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <script defer src="{% static 'js/jquery.js'%}"></script>
+    <script defer src="{% static 'js/addbusdestination.js'%}"></script>
+      
+
+    <title>Add Bus Destination</title>
+</head>
+
+<body><br>
+    <h1 class="display-4 text-center m-5"><b>Hello....Admin</b></h1>
+    <ul class="nav justify-content-center mt-5">
+      <li class="nav-item">
+        <a class="nav-link active " aria-current="page" href="{% url 'addbus' %}">Add Bus </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'adminpage' %}" class="busss">Show Bus</a>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'addbusdestination' %}">Add Bus Destination</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'pessengerdetail' %}">Show Pessenger List</a>
+      </li>
+      <li class="nav-item lout">
+        <a class="nav-link btn btn-danger" href="{% url 'logout' %}">Logout</a>
+      </li>
+      
+    </ul><br><br><br>
+    
+    <div class="container text-center">
+        <form method="POST" >
+          {% csrf_token%} 
+         
+            
+          <div class="mb-3  text-center">
+            <label for="exampleInputPassword1" class="form-label">Enter The Starting Point </label>
+            <input type="text" class="form-control w-50 m-auto"  name='start' id="start">
+            <span class='starttext'></span>
+          </div>
+          <div class="mb-3  text-center">
+            <label for="exampleInputPassword1" class="form-label">Enter The Ending Point</label>
+            <input type="text" class="form-control w-50 m-auto"  name='end' id="end">
+            <span class="endtext"></span>
+          </div>
+    
+         
+          <div class="mb-3  text-center w-50 m-auto">
+            <label for="exampleInputPassword1" class="form-label">Addbus</label><br>
+            <!-- <select name="destination" id="destination" class="text-center w-100" multiple> -->
+              <select name="destination" id="destination" class='w-100 text-center' multiple>
+                {%for ts in transport%}
+            
+                  <option value="{{ts.id}}">{{ts.transport_name}}</option>
+                  
+                
+                {%endfor%}
+              </select>
+            </select>
+          </div>
+    
+       
+          
+          <button type="submit" class="btn btn-primary " id="addbusdestination">Save</button>&nbsp;&nbsp;&nbsp;
+          <a href="{% url 'adminpage' %}" class="btn btn-primary">Back</a>
+        </form><br>
+    
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
